@@ -1,0 +1,6 @@
+.git/
+.gitignore
+.github/
+LICENSE
+*.md
+!README.md
