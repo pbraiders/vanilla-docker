@@ -1,6 +1,9 @@
+.env
 .git/
-.gitignore
+.gitattributes
 .github/
+.gitignore
 LICENSE
+ojullien/
 *.md
 !README.md
