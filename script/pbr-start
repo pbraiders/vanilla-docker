@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/ports.conf
+sed -i "s/:80/:${PORT:-80}/g" /etc/apache2/sites-enabled/*
+touch /var/log/apache2/access.log /var/log/apache2/error.log /var/log/apache2/other_vhosts_access.log /var/log/php.log /var/log/mariadb.log
+touch /var/log/php7.4-fpm.log /var/log/mysql/error.log
+ln -sf /dev/stdout /var/log/apache2/access.log
+ln -sf /dev/stderr /var/log/apache2/error.log
+ln -sf /dev/stdout /var/log/apache2/other_vhosts_access.log
+ln -sf /dev/stdout /var/log/php7.4-fpm.log
+ln -sf /dev/stdout /var/log/mysql/error.log
+/usr/bin/mysqld_safe --flush-caches&
+sleep 7
+/usr/bin/mysql -u root < /var/www/html/pbraiders-vanilla.local/config/install.sql
+/etc/init.d/php7.4-fpm start
+&>/dev/null /usr/sbin/apachectl -DFOREGROUND -k start
