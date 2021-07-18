@@ -7,6 +7,8 @@ ln -sf /dev/stdout /var/log/apache2/access.log
 ln -sf /dev/stderr /var/log/apache2/error.log
 ln -sf /dev/stdout /var/log/apache2/other_vhosts_access.log
 ln -sf /dev/stdout /var/log/php7.4-fpm.log
+ln -sf /dev/stdout /var/log/php.log
+ln -sf /dev/stdout /var/log/mariadb.log
 ln -sf /dev/stdout /var/log/mysql/error.log
 /usr/bin/mysqld_safe --flush-caches&
 sleep 7
